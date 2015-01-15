@@ -1,0 +1,35 @@
+; Drush Make API version.
+api = 2
+
+; Drupal core.
+core = 7.x
+
+; Tuque
+libraries[tuque][type] = "library"
+libraries[tuque][download][type] = "git"
+libraries[tuque][download][url] = "git@github.com:Islandora/tuque.git"
+libraries[tuque][download][branch] = "1.4"
+
+; PHP Lib
+projects[php_lib][type] = "module"
+projects[php_lib][download][type] = "git"
+projects[php_lib][download][url] = "git@github.com:Islandora/php_lib.git"
+projects[php_lib][download][branch] = "7.x-1.4"
+
+; Islandora Core
+projects[islandora][type] = "module"
+projects[islandora][download][type] = "git"
+projects[islandora][download][url] = "git@github.com:Islandora/islandora.git"
+projects[islandora][download][branch] = "7.x-1.4"
+
+; Islandora Objective Forms
+projects[objective_forms][type] = "module"
+projects[objective_forms][download][type] = "git"
+projects[objective_forms][download][url] = "git@github.com:Islandora/objective_forms.git"
+projects[objective_forms][download][branch] = "7.x-1.4"
+
+; Islandora XML Forms
+projects[xml_forms][type] = "module"
+projects[xml_forms][download][type] = "git"
+projects[xml_forms][download][url] = "git@github.com:Islandora/islandora_xml_forms.git"
+projects[xml_forms][download][branch] = "7.x-1.4"

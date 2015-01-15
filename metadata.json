@@ -1,0 +1,24 @@
+{
+    "name": "puppet-islandora",
+    "version": "0.0.1",
+    "author": "griffinj@lafayette.edu",
+    "license": "GPLv2",
+    "summary": "A Puppet Module for Managing Islandora 7.x",
+    "source": "https://github.com/jrgriffiniii/puppet-islandora",
+    "project_page": "https://github.com/jrgriffiniii/puppet-islandora",
+    "issues_url": "https://github.com/jrgriffiniii/puppet-islandora/issues",
+    "tags": [
+        "fedora commons",
+        "fcrepo",
+        "repository",
+        "preservation",
+	"islandora",
+	"drupal"
+    ],
+    "dependencies": [
+        {
+            "name": "erikwebb/drush",
+            "version_requirement": "4.1.x"
+        }
+    ]
+}

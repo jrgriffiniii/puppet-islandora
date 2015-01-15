@@ -1,0 +1,7 @@
+fedora-auth
+{
+org.fcrepo.server.security.jaas.auth.module.XmlUsersFileModule required
+debug=<%= @islandora_filter_debug %>;
+ca.upei.roblib.fedora.servletfilter.DrupalAuthModule required
+debug=<%= @islandora_filter_debug %>;
+};
