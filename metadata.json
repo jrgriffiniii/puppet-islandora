@@ -16,5 +16,7 @@
 	"drupal"
     ],
     "dependencies": [
+	{ "name": "example42/puppi", "version_requirement": "2.0.x" },
+	{ "name": "puppetlabs/postgresql", "version_requirement": "4.1.x" }
     ]
 }

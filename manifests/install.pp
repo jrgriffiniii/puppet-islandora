@@ -85,6 +85,6 @@ class islandora::install inherits islandora {
     command => "si --account-mail=admin@islandora.localdomain --account-pass=secret --db-url=pgsql://${islandora::database_user}:${islandora::database_pass}@${islandora::database_server}:${islandora::database_port}/${islandora::database_name} --site-mail=admin@islandora.localdomain --site-name=Islandora",
     root_directory => '/var/www/islandora-7.x-1.4',
     options => [ '--yes' ],
-    require => Exec['islandora_drupal_install']
+    require => Drush::Exec['islandora_drupal_install']
   }
 }
