@@ -4,29 +4,17 @@
 #
 class islandora::install inherits islandora {
 
-  exec { 'islandora_download':
-    
-    command => "/usr/bin/env wget ${islandora::download_url} -O /tmp/islandora.zip",
-    unless => '/usr/bin/env stat /tmp/islandora.zip'
-  }
-
-  exec { 'islandora_deploy':
-
-    command => "/usr/bin/env unzip /tmp/islandora.zip islandora.war -d ${islandora::servlet_webapps_dir_path}",
-    require => Exec['islandora_download']
-  }
-
   exec { 'islandora_filter_download':
     
-    command => "/usr/bin/env wget ${islandora_filter_download_url} -O /tmp/fcrepo-drupalauthfilter-3.7.0.jar",
+    command => "/usr/bin/env wget ${islandora::islandora_filter_download_url} -O /tmp/fcrepo-drupalauthfilter-3.7.0.jar",
     unless => '/usr/bin/env stat /tmp/fcrepo-drupalauthfilter-3.7.0.jar'
   }
 
   exec { 'islandora_filter_deploy':
 
-    command => "/usr/bin/env cp /tmp/fcrepo-drupalauthfilter-3.7.0.jar ${servlet_webapps_dir_path}/fedora/WEB-INF/lib",
-    unless => "/usr/bin/env stat ${servlet_webapps_dir_path}/fedora/WEB-INF/lib/fcrepo-drupalauthfilter-3.7.0.jar",
-    require => Exec['filter_download']
+    command => "/usr/bin/env cp /tmp/fcrepo-drupalauthfilter-3.7.0.jar ${islandora::servlet_webapps_dir_path}/fedora/WEB-INF/lib",
+    unless => "/usr/bin/env stat ${islandora::servlet_webapps_dir_path}/fedora/WEB-INF/lib/fcrepo-drupalauthfilter-3.7.0.jar",
+    require => Exec['islandora_filter_download']
   }
 
   file_line { 'islandora_fedora_config_filter':
@@ -64,7 +52,7 @@ class islandora::install inherits islandora {
     require => Class['postgresql::server']
   }
     
-  postgresql::server::db { $islandora::database:
+  postgresql::server::db { $islandora::database_name:
     
     user     => $islandora::database_user,
     password => postgresql_password($islandora::database_user, $islandora::database_pass),
@@ -76,7 +64,7 @@ class islandora::install inherits islandora {
 
   exec { 'islandora_drush_env' :
     
-    command => "/bin/bash -c \"export PGPASS=${pg_pass}\"",
+    command => "/bin/bash -c \"export PGPASS=${islandora::database_pass}\"",
     require => Class['::drush']
   }
 
@@ -94,7 +82,7 @@ class islandora::install inherits islandora {
   
   drush::exec { "islandora_deploy":
 
-    command => "si --account-mail=admin@islandora.localdomain --account-pass=secret --db-url=pgsql://islandora:secret@localhost:5432/islandora --site-mail=admin@islandora.localdomain --site-name=Islandora",
+    command => "si --account-mail=admin@islandora.localdomain --account-pass=secret --db-url=pgsql://${islandora::database_user}:${islandora::database_pass}@${islandora::database_server}:${islandora::database_port}/${islandora::database_name} --site-mail=admin@islandora.localdomain --site-name=Islandora",
     root_directory => '/var/www/islandora-7.x-1.4',
     options => [ '--yes' ],
     require => Exec['islandora_drupal_install']

@@ -22,6 +22,9 @@ class islandora::params {
   $solr_context = 'solr'
   $solr_index_name = 'fedora'
 
+  # Fedora Commons
+  $fedora_home = '/usr/local/fedora'
+
   ## Database Management System
   $database_type = 'postgresql'
   $database_user = 'islandora'
