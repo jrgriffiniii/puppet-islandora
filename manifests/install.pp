@@ -100,7 +100,7 @@ class islandora::install inherits islandora {
     
     docroot => '/var/www/islandora-7.x-1.4',
     require => Drush::Exec['islandora_deploy']
-  }
+  })
 
   # Add an iptables rule to permit traffic over the HTTP and HTTPS
   ensure_resource('firewall', '001 allow http and https access for Apache HTTP Server', {
@@ -108,6 +108,6 @@ class islandora::install inherits islandora {
     port   => [80, 443],
     proto  => 'tcp',
     action => 'accept'
-  }
+  })
 
 }
