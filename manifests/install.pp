@@ -68,16 +68,18 @@ class islandora::install inherits islandora {
     require => Class['::drush']
   }
 
-  file { '/tmp/islandora.makefile':
+  file { '/tmp/islandora.make':
 
-    content => template('islandora/islandora.makefile.erb')
+    content => template('islandora/islandora.make.erb')
   }
+
+  ensure_packages 'git'
 
   drush::exec { "islandora_drupal_install":
 
     command => "make",
-    options => [ '/tmp/islandora.makefile', $islandora::doc_root ],
-    require => [ Exec['islandora_drush_env'], File['/tmp/islandora.makefile'] ]
+    options => [ '/tmp/islandora.make', $islandora::doc_root ],
+    require => [ Exec['islandora_drush_env'], File['/tmp/islandora.make'] ]
   }
   
   drush::exec { "islandora_deploy":
