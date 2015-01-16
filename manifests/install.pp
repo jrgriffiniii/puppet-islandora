@@ -73,7 +73,7 @@ class islandora::install inherits islandora {
     content => template('islandora/islandora.make.erb')
   }
 
-  ensure_packages 'git', 'php-mbstring', 'php-gd', 'php-xml', 'php-pgsql', 'php-pdo'
+  ensure_packages(['git', 'php-mbstring', 'php-gd', 'php-xml', 'php-pgsql', 'php-pdo'])
 
   drush::exec { "islandora_drupal_install":
 
