@@ -1,4 +1,4 @@
-name    'puppet-islandora'
+name    'jrgriffiniii-islandora'
 version '0.1.0'
 source 'https://github.com/jrgriffiniii/puppet-islandora'
 author 'griffinj@lafayette.edu'

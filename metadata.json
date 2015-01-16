@@ -16,9 +16,5 @@
 	"drupal"
     ],
     "dependencies": [
-        {
-            "name": "erikwebb/drush",
-            "version_requirement": "4.1.x"
-        }
     ]
 }
