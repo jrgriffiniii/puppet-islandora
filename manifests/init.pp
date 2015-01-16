@@ -1,11 +1,11 @@
 # == Class: islandora
 #
-# This is the class for solr
+# This is the class for Islandora
 #
 #
 # == Parameters
 #
-# Standard class parameters - Define solr web app specific settings
+# @todo Structure
 #
 #
 #
