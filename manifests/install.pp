@@ -93,11 +93,11 @@ class islandora::install inherits islandora {
   # Configure Apache HTTP Server
   
   # Set the DocumentRoot directive for the default VirtualHost
-  ensure_resource('class', '::apache', {
+  class { '::apache':
     
-    docroot => '/var/www/islandora-7.x-1.4',
+    docroot => '/var/www/cartaro-7.x-1.5',
     require => Drush::Exec['islandora_deploy']
-  }) -> include apache::mod::php # Include mod_php
+    } -> include apache::mod::php # Include mod_php
 
   # Add an iptables rule to permit traffic over the HTTP and HTTPS
   ensure_resource('firewall', '001 allow http and https access for Apache HTTP Server', {
