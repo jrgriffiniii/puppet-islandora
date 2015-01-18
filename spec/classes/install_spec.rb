@@ -21,6 +21,14 @@ describe 'islandora' do
 
     it do
 
+      should contain_drush__exec('islandora_drupal_install')
+        .that_requires("File[/var/www/islandora-7.x-1.4]")
+        .that_requires("Exec[islandora_drush_env]")
+        .that_requires("File[/tmp/islandora.make]")
+    end
+
+    it do
+
       should contain_drush__exec('islandora_deploy')
         .that_requires("Drush::Exec[islandora_drupal_install]")
         .that_requires("Postgresql::Server::Db[islandora]")

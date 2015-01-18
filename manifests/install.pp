@@ -83,11 +83,18 @@ class islandora::install inherits islandora {
 
   ensure_packages(['git', 'php-mbstring', 'php-gd', 'php-xml', 'php-pgsql', 'php-pdo'])
 
+  # Work-around
+  # Ensures that the directory doesn't already exist (Drush raises an error)
+  file { $islandora::doc_root:
+    
+    ensure => 'absent'
+  }
+
   drush::exec { "islandora_drupal_install":
 
     command => "make",
     options => [ '/tmp/islandora.make', $islandora::doc_root ],
-    require => [ Exec['islandora_drush_env'], File['/tmp/islandora.make'] ]
+    require => [ File[$islandora::doc_root], Exec['islandora_drush_env'], File['/tmp/islandora.make'] ]
   }
   
   drush::exec { "islandora_deploy":
