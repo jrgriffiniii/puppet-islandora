@@ -43,6 +43,7 @@ describe 'islandora' do
         .that_requires("Postgresql::Server::Db[islandora]")
     end
 
+    it { should create_class('fedora_commons')}
     it { should create_class('postgresql::globals')}
     it { should create_class('postgresql::server')}
     it { should create_class('apache')}

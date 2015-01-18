@@ -10,11 +10,20 @@ class islandora::install inherits islandora {
     unless => '/usr/bin/env stat /tmp/fcrepo-drupalauthfilter-3.7.0.jar'
   }
 
+  # Fedora Commons
+  if $islandora::fedora_commons == '' or !defined( $islandora::fedora_commons ) {
+
+    if !defined( Class['::fedora_commons'] ) { # Ensure that Fedora Commons has been loaded
+          
+      include "::fedora_commons"
+    }
+  }
+
   exec { 'islandora_filter_deploy':
 
     command => "/usr/bin/env cp /tmp/fcrepo-drupalauthfilter-3.7.0.jar ${islandora::servlet_webapps_dir_path}/fedora/WEB-INF/lib",
     unless => "/usr/bin/env stat ${islandora::servlet_webapps_dir_path}/fedora/WEB-INF/lib/fcrepo-drupalauthfilter-3.7.0.jar",
-    require => Exec['islandora_filter_download']
+    require => [ Exec['islandora_filter_download'], Class['::fedora_commons'] ]
   }
 
   file_line { 'islandora_fedora_config_filter':

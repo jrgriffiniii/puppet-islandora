@@ -24,6 +24,7 @@ class islandora::params {
 
   # Fedora Commons
   $fedora_home = '/usr/local/fedora'
+  $fedora_commons = undef
 
   ## Database Management System
   $database_type = 'postgresql'
