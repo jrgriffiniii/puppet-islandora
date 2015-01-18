@@ -2,10 +2,6 @@ require 'spec_helper'
 
 describe 'islandora' do
 
-  let(:title) { 'test_islandora' }
-
-
-
   context 'On a Redhat OS' do
 
     let :facts do
@@ -16,22 +12,15 @@ describe 'islandora' do
       }
     end
 
-    it { should compile }
-  
-    it do
-    
-      should contain_file('/usr/local/fedora/server/config/jaas.conf')
-        .with_content(/DrupalAuthModule/)
-    end
+    # @todo Resolve
+    # it { should compile }
+    # it { should compile.with_all_deps }
 
-    it do
+    it { should create_class('postgresql::server')}
 
-      should contain_file('/usr/local/fedora/server/config/filter-drupal.xml')
-        .with({
-                'ensure' => 'present',
-                'owner' => 'tomcat',
-                'group' => 'tomcat'
-              })
-    end
+    it { should create_class('apache')}
+
+    it { should have_firewall_resource_count(1) }
+
   end
 end

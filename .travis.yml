@@ -1,0 +1,7 @@
+language: ruby
+rvm:
+  - 2.0.0
+  - ree
+script: "rake spec"
+env:
+  - PUPPET_VERSION=3.4.3

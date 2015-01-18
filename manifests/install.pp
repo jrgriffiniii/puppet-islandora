@@ -114,11 +114,12 @@ class islandora::install inherits islandora {
   include 'apache::mod::php'
 
   # Add an iptables rule to permit traffic over the HTTP and HTTPS
-  ensure_resource('firewall', '001 allow http and https access for Apache HTTP Server', {
+  # ensure_resource('firewall', '001 allow http and https access for Apache HTTP Server', {
+  firewall { '001 allow http and https access for Apache HTTP Server':
     
     port   => [80, 443],
     proto  => 'tcp',
     action => 'accept'
-  })
+  }
 
 }
