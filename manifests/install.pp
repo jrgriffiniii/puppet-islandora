@@ -33,7 +33,7 @@ class islandora::install inherits islandora {
   # @todo Refactor with hiera (for default parameter parsing)
   
   # Loading the RDBMS
-  if !defined( $islandora::database ) {
+  if $islandora::database == '' or !defined( $islandora::database ) {
 
     # Select the package to install
     case $islandora::database_type {
@@ -55,7 +55,7 @@ class islandora::install inherits islandora {
   }
 
   # Starting the RDBMS server
-  if !defined( $islandora::database_server ) {
+  if $islandora::database_server == '' or !defined( $islandora::database_server ) {
 
     case $islandora::database_type {
 
@@ -146,7 +146,7 @@ class islandora::install inherits islandora {
   }
 
   # Loading the HTTP Server
-  if !defined( $islandora::http_service ) {
+  if $islandora::http_service == '' or !defined( $islandora::http_service ) {
 
     # Select the HTTP server
     case $islandora::http_service_type {

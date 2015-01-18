@@ -43,10 +43,10 @@ describe 'islandora' do
         .that_requires("Postgresql::Server::Db[islandora]")
     end
 
-    # it { should create_class('postgresql::server')}
-    # it { should create_class('apache')}
+    it { should create_class('postgresql::globals')}
+    it { should create_class('postgresql::server')}
+    it { should create_class('apache')}
 
-    # it { should have_postgresql__server_resource_count(1) }
     it { should have_firewall_resource_count(1) }
 
   end
