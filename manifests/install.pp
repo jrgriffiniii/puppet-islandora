@@ -32,8 +32,16 @@ class islandora::install inherits islandora {
 
   # PostgreSQL
   # @todo Refactor with hiera (for default parameter parsing)
-  ensure_resource('class', 'postgresql::globals', { manage_package_repo => true })
-  ensure_resource('class', 'postgresql::server', {
+
+  #  ensure_resource('class', 'postgresql::globals', { manage_package_repo => true })
+  class { 'postgresql::globals':
+
+    manage_package_repo => true,
+    version             => '9.2'
+  }
+  
+#  ensure_resource('class', 'postgresql::server', {
+  class { 'postgresql::server':
     
     listen_addresses => '*',
 
@@ -42,7 +50,7 @@ class islandora::install inherits islandora {
     # ipv4acls                   => ['hostssl all 192.168.0.0/24 cert'],
     postgres_password          => 'secret',
     require => Class['postgresql::globals']
-    })
+  }
 
   # Create the database for the repository
   # Use either MySQL or PostgreSQL
@@ -91,13 +99,19 @@ class islandora::install inherits islandora {
   }
 
   # Configure Apache HTTP Server
+
+  # include apache::mod::php # Include mod_php
   
   # Set the DocumentRoot directive for the default VirtualHost
   class { '::apache':
     
-    docroot => '/var/www/cartaro-7.x-1.5',
-    require => Drush::Exec['islandora_deploy']
-    } -> include apache::mod::php # Include mod_php
+    docroot => '/var/www/islandora-7.x-1.4',
+    require => Drush::Exec['islandora_deploy'],
+    mpm_module => 'prefork'
+#    after => Class['apache::mod::php']
+  }
+
+  include 'apache::mod::php'
 
   # Add an iptables rule to permit traffic over the HTTP and HTTPS
   ensure_resource('firewall', '001 allow http and https access for Apache HTTP Server', {

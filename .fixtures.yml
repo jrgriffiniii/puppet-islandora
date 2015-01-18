@@ -1,0 +1,21 @@
+fixtures:
+
+  forge_modules:
+
+    puppi: "example42/puppi"
+    stdlib: 'puppetlabs/stdlib'
+
+    epel: 'stahnma/epel'
+
+    concat: 'puppetlabs/concat' # Dependency for PostgreSQL
+    postgresql: 'puppetlabs/postgresql'
+
+    firewall: 'puppetlabs/firewall'
+    apache: 'puppetlabs/apache'
+    php: 'example42/php'
+
+    pear: 'rafaelfc/pear' # Dependency for drush
+    drush: 'erikwebb/drush'
+
+  symlinks:
+    islandora: "#{source_dir}"
