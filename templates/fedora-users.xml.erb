@@ -5,7 +5,7 @@ username and password as another user in a separate drupaldb.  We are also assum
 in the same directory as the fedora.cfcg file-->
  
 <FilterDrupal_Connection>
-  <connection server="<%= @database_server %>" dbname="<%= @database_name %>" user="<%= @database_user %>" password="<%= @database_pass %>" port="<%= @database_port %>" dbtype="<%= @database_type %>">
+  <connection server="<%= @database_host %>" dbname="<%= @database_name %>" user="<%= @database_user %>" password="<%= @database_pass %>" port="<%= @database_port %>" dbtype="<%= @database_type %>">
     <sql>
                   <!--Different sql statement for each connection.  This is for drupal multisites that are setup using one database with
                   table prefixes.  We don't do this but some people might.-->

@@ -29,7 +29,14 @@ class islandora::params {
   $database_type = 'postgresql'
   $database_user = 'islandora'
   $database_pass = 'secret'
-  $database_server = 'localhost'
+  $database_host = 'localhost'
   $database_port = 5432
   $database_name = 'islandora'
+
+  $database = undef
+  $database_server = undef
+
+  # HTTP Server
+  $http_service = undef
+  $http_service_type = 'apache'
 }

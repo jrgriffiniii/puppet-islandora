@@ -2,11 +2,12 @@ require 'spec_helper'
 
 describe 'islandora' do
 
-  context 'On a Redhat OS' do
+  context 'on CentOS 6.4' do
 
     let :facts do
       {
         :osfamily => 'RedHat',
+        :operatingsystem => 'CentOS',
         :operatingsystemrelease => '6.4',
         :concat_basedir => '/var/lib/puppet'
       }
@@ -42,10 +43,10 @@ describe 'islandora' do
         .that_requires("Postgresql::Server::Db[islandora]")
     end
 
-    it { should create_class('postgresql::server')}
+    # it { should create_class('postgresql::server')}
+    # it { should create_class('apache')}
 
-    it { should create_class('apache')}
-
+    # it { should have_postgresql__server_resource_count(1) }
     it { should have_firewall_resource_count(1) }
 
   end
