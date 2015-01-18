@@ -87,7 +87,8 @@ class islandora::install inherits islandora {
   # Ensures that the directory doesn't already exist (Drush raises an error)
   file { $islandora::doc_root:
     
-    ensure => 'absent'
+    ensure => 'absent',
+    force => true
   }
 
   drush::exec { "islandora_drupal_install":
