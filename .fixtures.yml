@@ -21,7 +21,7 @@ fixtures:
 
     fedora_commons:
 
-      repo: 'git@github.com:LafayetteCollegeLibraries/puppet-fedora_commons.git'
+      repo: 'https://github.com/LafayetteCollegeLibraries/puppet-fedora_commons.git'
       ref: '33ed9e205e045d8cc030aeea2b118beb91180179'
 
   symlinks:

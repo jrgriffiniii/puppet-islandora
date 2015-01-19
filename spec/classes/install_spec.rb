@@ -17,6 +17,22 @@ describe 'islandora' do
     # it { should compile }
     # it { should compile.with_all_deps }
 
+    # Fedora Commons installation process
+    it { should create_class('fedora_commons')}
+
+    # Ensure that the Drupal filter requires Fedora Commons to be installed
+    it do
+
+      should contain_file_line('islandora_fedora_config_jaas')
+        .that_requires("Class[fedora_commons]")
+    end
+
+    it do
+
+      should contain_file_line('islandora_fedora_add_filter')
+        .that_requires("Class[fedora_commons]")
+    end
+
     # For the Drush installation process
     it { should create_class('drush')}
 
@@ -43,7 +59,7 @@ describe 'islandora' do
         .that_requires("Postgresql::Server::Db[islandora]")
     end
 
-    it { should create_class('fedora_commons')}
+
     it { should create_class('postgresql::globals')}
     it { should create_class('postgresql::server')}
     it { should create_class('apache')}

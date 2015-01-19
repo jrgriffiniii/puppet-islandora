@@ -26,17 +26,19 @@ class islandora::install inherits islandora {
     require => [ Exec['islandora_filter_download'], Class['::fedora_commons'] ]
   }
 
-  file_line { 'islandora_fedora_config_filter':
+  file_line { 'islandora_fedora_config_jaas':
 
     path => "${islandora::fedora_home}/server/config/jaas.conf",
     line => template('islandora/jaas.conf.erb'),
-    after => "org.fcrepo.server.security.jaas.auth.module.XmlUsersFileModule required\ndebug=true;"
+    after => "org.fcrepo.server.security.jaas.auth.module.XmlUsersFileModule required\ndebug=true;",
+    require => Class['::fedora_commons']
   }
   
   file_line { 'islandora_fedora_add_filter':
 
     path => "${islandora::fedora_home}/server/config/fedora-users.xml",
-    line => template('islandora/fedora-users.xml.erb')
+    line => template('islandora/fedora-users.xml.erb'),
+    require => Class['::fedora_commons']
   }
 
   # @todo Refactor with hiera (for default parameter parsing)
